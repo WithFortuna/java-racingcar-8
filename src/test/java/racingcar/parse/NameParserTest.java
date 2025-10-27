@@ -67,4 +67,19 @@ class NameParserTest {
 			.hasSize(3)
 			.containsExactly("pobi", " woni", " jun");
 	}
+
+	@DisplayName("Empty인 문자열도 리스트 항목으로 변환한다.")
+	@Test
+	void shouldParseEmptyName() {
+		// given
+		String participantNames = "pobi, woni, jun,, gno";
+
+		// when
+		List<String> result = NameParser.parseNamesToList(participantNames);
+
+		// then
+		assertThat(result)
+			.hasSize(5)
+			.containsExactly("pobi", " woni", " jun", "", " gno");
+	}
 }
